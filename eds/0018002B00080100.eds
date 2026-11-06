@@ -1,0 +1,78 @@
+$ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
+
+[File]
+        DescText = "Unofficial EDS Interpreter Test: Param DINT";
+        CreateDate = 11-10-2025;
+        CreateTime = 12:06:37;
+        ModDate = 11-10-2025;
+        ModTime = 12:10:13;
+        Revision = 1.0;
+        1_IOC_Details_License = 0x9BA6D199;
+
+[Device]
+        VendCode = 24;
+        VendName = "ODVA Inc";
+        ProdType = 43;
+        ProdTypeStr = "Generic Device";
+        ProdCode = 8;
+        MajRev = 1;
+        MinRev = 1;
+        ProdName = "Param DINT";
+
+[Device Classification]
+        Class1 = EtherNetIP;
+
+[Params]
+        Param1 =
+                0,                      $ reserved, shall equal 0
+                4,"20 0F 24 01",        $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC4,                   $ Data Type
+                4,                      $ Data Size in bytes
+                "DINT 1",               $ name
+                "Unit 1",               $ units
+                "Default to 2147483647",$ help string
+                ,,2147483647,           $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Param2 =
+                0,                      $ reserved, shall equal 0
+                4,"20 0F 24 02",        $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC4,                   $ Data Type
+                4,                      $ Data Size in bytes
+                "DINT 2",               $ name
+                "Unit 2",               $ units
+                "Default to -2147483648",    $ help string
+                ,,-2147483648,          $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Param3 =
+                0,                      $ reserved, shall equal 0
+                4,"20 0F 24 03",        $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC4,                   $ Data Type
+                4,                      $ Data Size in bytes
+                "DINT 3",               $ name
+                "Unit 3",               $ units
+                "Range -70000 to 70000, default -50000",    $ help string
+                -70000,70000,-50000,    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Param4 =
+                0,                      $ reserved, shall equal 0
+                4,"20 0F 24 04",        $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC4,                   $ Data Type
+                4,                      $ Data Size in bytes
+                "DINT 4",               $ name
+                "Unit 4",               $ units
+                "Range -2147483648 to 2147483647, default 0",    $ help string
+                -2147483648,2147483647,0,    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+

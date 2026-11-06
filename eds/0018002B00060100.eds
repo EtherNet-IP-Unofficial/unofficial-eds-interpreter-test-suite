@@ -1,0 +1,78 @@
+$ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
+
+[File]
+        DescText = "Unofficial EDS Interpreter Test: Param SINT";
+        CreateDate = 11-10-2025;
+        CreateTime = 12:06:37;
+        ModDate = 11-10-2025;
+        ModTime = 12:10:13;
+        Revision = 1.0;
+        1_IOC_Details_License = 0x0525FC17;
+
+[Device]
+        VendCode = 24;
+        VendName = "ODVA Inc";
+        ProdType = 43;
+        ProdTypeStr = "Generic Device";
+        ProdCode = 6;
+        MajRev = 1;
+        MinRev = 1;
+        ProdName = "Param SINT";
+
+[Device Classification]
+        Class1 = EtherNetIP;
+
+[Params]
+        Param1 =
+                0,                      $ reserved, shall equal 0
+                4,"20 0F 24 01",        $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC2,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "SINT 1",               $ name
+                "Unit 1",               $ units
+                "Default to 127",       $ help string
+                ,,127,                  $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Param2 =
+                0,                      $ reserved, shall equal 0
+                4,"20 0F 24 02",        $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC2,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "SINT 2",               $ name
+                "Unit 2",               $ units
+                "Default to -128",      $ help string
+                ,,-128,                 $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Param3 =
+                0,                      $ reserved, shall equal 0
+                4,"20 0F 24 03",        $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC2,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "SINT 3",               $ name
+                "Unit 3",               $ units
+                "Range -5 to 5, default -1",    $ help string
+                -5,5,-1,                $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Param4 =
+                0,                      $ reserved, shall equal 0
+                4,"20 0F 24 04",        $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC2,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "SINT 4",               $ name
+                "Unit 4",               $ units
+                "Range -128 to 127, default 0",    $ help string
+                -128,127,0,             $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+
