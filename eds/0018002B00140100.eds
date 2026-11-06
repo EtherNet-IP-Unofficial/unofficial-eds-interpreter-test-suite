@@ -1,0 +1,346 @@
+$ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
+
+[File]
+        DescText = "Unofficial EDS Interpreter Test: Param Enumeration";
+        CreateDate = 11-10-2025;
+        CreateTime = 12:06:37;
+        ModDate = 11-10-2025;
+        ModTime = 12:10:13;
+        Revision = 1.0;
+        1_IOC_Details_License = 0x7DD18CC4;
+
+[Device]
+        VendCode = 24;
+        VendName = "ODVA Inc";
+        ProdType = 43;
+        ProdTypeStr = "Generic Device";
+        ProdCode = 20;
+        MajRev = 1;
+        MinRev = 1;
+        ProdName = "Param Enumeration";
+
+[Device Classification]
+        Class1 = EtherNetIP;
+
+[Params]
+        Param1 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC1,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "BOOL",                 $ name
+                "",                     $ units
+                "",                     $ help string
+                ,,0,                    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum1 =
+                0,"Off",
+                1,"On";
+        Param2 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC2,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "SINT",                 $ name
+                "",                     $ units
+                "",                     $ help string
+                ,,0,                    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum2 =
+                -100,"Minus one hundred",
+                -1,"Minus one",
+                0,"Zero",
+                1,"One",
+                100,"One hundred";
+        Param3 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC3,                   $ Data Type
+                2,                      $ Data Size in bytes
+                "INT",                  $ name
+                "",                     $ units
+                "",                     $ help string
+                ,,0,                    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum3 =
+                -1000,"Minus one thousand",
+                -1,"Minus one",
+                0,"Zero",
+                1,"One",
+                1000,"One thousand";
+        Param4 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC6,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "USINT",                $ name
+                "",                     $ units
+                "",                     $ help string
+                ,,0,                    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum4 =
+                0,"Zero",
+                1,"One",
+                100,"One hundred";
+        Param5 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC7,                   $ Data Type
+                2,                      $ Data Size in bytes
+                "UINT",                 $ name
+                "",                     $ units
+                "",                     $ help string
+                ,,0,                    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum5 =
+                0,"Zero",
+                1,"One",
+                1000,"One thousand";
+        Param6 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xD1,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "BYTE",                 $ name
+                "",                     $ units
+                "",                     $ help string
+                ,,0b00000000,           $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum6 =
+                0,"Lowest bit (zero)",
+                1,"Second lowest bit (one)",
+                6,"Second highest bit (six)",
+                7,"Highest bit (seven)";
+        Param7 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xD2,                   $ Data Type
+                2,                      $ Data Size in bytes
+                "WORD",                 $ name
+                "",                     $ units
+                "",                     $ help string
+                ,,0b0000000000000000,   $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum7 =
+                0,"Lowest bit (zero)",
+                1,"Second lowest bit (one)",
+                14,"Second highest bit (fourteen)",
+                15,"Highest bit (fifteen)";
+        Param8 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xD3,                   $ Data Type
+                4,                      $ Data Size in bytes
+                "DWORD",                $ name
+                "",                     $ units
+                "",                     $ help string
+                ,,0b00000000000000000000000000000000,    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum8 =
+                0,"Lowest bit (zero)",
+                1,"Second lowest bit (one)",
+                30,"Second highest bit (thirty)",
+                31,"Highest bit (thirty-one)";
+        Param9 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xD4,                   $ Data Type
+                8,                      $ Data Size in bytes
+                "LWORD",                $ name
+                "",                     $ units
+                "",                     $ help string
+                ,,0b0000000000000000000000000000000000000000000000000000000000000000,    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum9 =
+                0,"Lowest bit (zero)",
+                1,"Second lowest bit (one)",
+                62,"Second highest bit (sixty-two)",
+                63,"Highest bit (sixty-three)";
+        Param10 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC1,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "BOOL 2",               $ name
+                "",                     $ units
+                "Default to On",        $ help string
+                ,,1,                    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum10 =
+                0,"Off",
+                1,"On";
+        Param11 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC2,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "SINT 2",               $ name
+                "",                     $ units
+                "Default to Minus one hundred",    $ help string
+                ,,-100,                 $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum11 =
+                -100,"Minus one hundred",
+                -1,"Minus one",
+                0,"Zero",
+                1,"One",
+                100,"One hundred";
+        Param12 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC3,                   $ Data Type
+                2,                      $ Data Size in bytes
+                "INT 2",                $ name
+                "",                     $ units
+                "Default to Minus one thousand",    $ help string
+                ,,-1000,                $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum12 =
+                -1000,"Minus one thousand",
+                -1,"Minus one",
+                0,"Zero",
+                1,"One",
+                1000,"One thousand";
+        Param13 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC6,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "USINT 2",              $ name
+                "",                     $ units
+                "Default to One hundred",    $ help string
+                ,,100,                  $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum13 =
+                0,"Zero",
+                1,"One",
+                100,"One hundred";
+        Param14 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC7,                   $ Data Type
+                2,                      $ Data Size in bytes
+                "UINT 2",               $ name
+                "",                     $ units
+                "Default to One thousand",    $ help string
+                ,,1000,                 $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum14 =
+                0,"Zero",
+                1,"One",
+                1000,"One thousand";
+        Param15 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xD1,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "BYTE 2",               $ name
+                "",                     $ units
+                "Default to bits 0, 1, 6, 7 set",    $ help string
+                ,,0b11000011,           $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum15 =
+                0,"Lowest bit (zero)",
+                1,"Second lowest bit (one)",
+                6,"Second highest bit (six)",
+                7,"Highest bit (seven)";
+        Param16 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xD2,                   $ Data Type
+                2,                      $ Data Size in bytes
+                "WORD 2",               $ name
+                "",                     $ units
+                "Default to bits 0, 1, 14, 15 set",    $ help string
+                ,,0b1100000000000011,   $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum16 =
+                0,"Lowest bit (zero)",
+                1,"Second lowest bit (one)",
+                14,"Second highest bit (fourteen)",
+                15,"Highest bit (fifteen)";
+        Param17 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xD3,                   $ Data Type
+                4,                      $ Data Size in bytes
+                "DWORD 2",              $ name
+                "",                     $ units
+                "Default to bits 0, 1, 30, 31 set",    $ help string
+                ,,0b11000000000000000000000000000011,    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum17 =
+                0,"Lowest bit (zero)",
+                1,"Second lowest bit (one)",
+                30,"Second highest bit (thirty)",
+                31,"Highest bit (thirty-one)";
+        Param18 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xD4,                   $ Data Type
+                8,                      $ Data Size in bytes
+                "LWORD 2",              $ name
+                "",                     $ units
+                "Default to bits 0, 1, 62, 63 set",    $ help string
+                ,,0b1100000000000000000000000000000000000000000000000000000000000011,    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum18 =
+                0,"Lowest bit (zero)",
+                1,"Second lowest bit (one)",
+                62,"Second highest bit (sixty-two)",
+                63,"Highest bit (sixty-three)";
+

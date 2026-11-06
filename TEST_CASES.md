@@ -273,14 +273,15 @@ Verifies that:
 
 ### Description
 
-Tests the use of EnumN entry keywords together with ParamN entries for integer and bit string data types.
+Tests the use of EnumN entry keywords together with ParamN entries for integer and bit string data types. Each data type is tested with two parameters: one with a default value of zero, and one with a non-zero default value that matches an enumerated name or, for bit strings, sets several named bits.
 
 Verifies that:
 
 - The tool correctly associates each EnumN entry with its corresponding ParamN entry and displays the enumerated names in place of the numeric values.
 - For the integer types (BOOL, SINT, INT, USINT, and UINT), each enumerated value is matched to the correct name, including negative values for the signed types (SINT and INT).
 - For the bit string types (BYTE, WORD, DWORD, and LWORD), the enumerated values are interpreted as bit positions, and the lowest, second lowest, second highest, and highest bits are named correctly for each data size, up to bit 63 for LWORD.
-- The default value of each parameter is displayed using its enumerated name where one is defined.
+- The default value of each parameter is displayed using its enumerated name where one is defined, including negative defaults for the signed types (for example, −100 shown as "Minus one hundred").
+- Bit string defaults with several bits set display the enumerated name of each set bit, including the highest bit of each data size.
 - Bit string defaults specified in binary notation are parsed correctly.
 - The data type, data size, parameter name, units, and help string are displayed as defined in the EDS.
 
