@@ -613,36 +613,46 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords together with the Indirect Parameter Reference (Descriptor bit 10), including a parameter value of 0, which means no reference. The values of the ParamN entries in the target configuration assembly select which ParamN entry is used for each member of the AssemN entry describing the T→O data.
+Tests the use of ParamN entry keywords together with the Indirect Parameter Reference (Descriptor bit 10), including a parameter value of 0, which means no reference. The values of the ParamN entries in the target configuration assembly select which ParamN entry is used for each member of the AssemN entry describing the T→O data. Each enumerated value is the number of the referenced ParamN entry, and 0 means that the member is omitted.
 
-The target configuration assembly contains three ParamN entries:
+The EDS defines three AssemN entries, used by an exclusive-owner connection (Connection1) with the RPI defined by Param1000:
 
-| Entry | Data type | Offset (bits) | Size (bits) | Selects |
-|---|---|---:|---:|---|
-| 1 | USINT | 0 | 8 | First T→O entry |
-| 2 | USINT | 8 | 8 | Second T→O entry |
-| 3 | USINT | 16 | 8 | Third T→O entry |
-| **Total** | | | **24 (3 bytes)** | |
+- **Assem1 (O→T):** one 16-bit member, UINT Dummy (Param5).
+- **Assem2 (T→O):** three members, resolved indirectly through Param1001, Param1002, and Param1003. The size of the second member is not declared, since it is either 0 or 16 bits depending on the selection.
+- **Assem99 (configuration):** Param1001, Param1002, and Param1003, delivered as the target configuration.
+
+The target configuration assembly has the following structure:
+
+| Entry | ParamN | Name | Data type | Offset (bits) | Size (bits) | Default | Selects |
+|---|---|---|---|---:|---:|---|---|
+| 1 | Param1001 | UINT 1 or UINT 2 | USINT | 0 | 8 | 1 (UINT 1) | First T→O entry |
+| 2 | Param1002 | None - INT or UINT | USINT | 8 | 8 | 3 (INT) | Second T→O entry |
+| 3 | Param1003 | INT or UINT | USINT | 16 | 8 | 6 (INT) | Third T→O entry |
+| **Total** | | | | | **24 (3 bytes)** | | |
 
 The AssemN entry describing the T→O data contains either two or three 16-bit entries. The first entry is always a UINT, the second entry may be omitted, INT, or UINT, and the third entry may be either INT or UINT, depending on the selections:
 
-| Configuration entry | Selection | T→O entry | Data type |
-|---|---|---|---|
-| 1 | UINT 1 | 1 | UINT |
-| 1 | UINT 2 | 1 | UINT |
-| 2 | None (0) | 2 | Omitted |
-| 2 | INT | 2 | INT |
-| 2 | UINT | 2 | UINT |
-| 3 | INT | 3 | INT |
-| 3 | UINT | 3 | UINT |
+| Configuration entry | Selection (value) | Referenced ParamN | T→O entry | Data type |
+|---|---|---|---|---|
+| 1 | UINT 1 (1) | Param1 (UINT 1) | 1 | UINT |
+| 1 | UINT 2 (2) | Param2 (UINT 2) | 1 | UINT |
+| 2 | None (0) | — | 2 | Omitted |
+| 2 | INT (3) | Param3 (None - INT) | 2 | INT |
+| 2 | UINT (4) | Param4 (None - UINT) | 2 | UINT |
+| 3 | INT (6) | Param6 (INT) | 3 | INT |
+| 3 | UINT (7) | Param7 (UINT) | 3 | UINT |
+
+With the default configuration, the T→O data consists of the parameters UINT 1 (Param1), None - INT (Param3), and INT (Param6), for a total of 48 bits (6 bytes).
 
 Verifies that:
 
 - The tool recognizes the Indirect Parameter Reference (Descriptor bit 10) and offers the enumerated choices for each configuration ParamN entry, including None.
 - A value of 0 (None) is treated as no reference: the second T→O entry is omitted, and the tool doesn't report it as an error or an invalid reference.
+- The tool handles the second T→O member having no declared size, and uses the size of the referenced ParamN entry when one is selected.
 - When the second entry is omitted, the third entry follows directly after the first entry, at bit offset 16 instead of 32.
-- The T→O assembly size is calculated as 32 bits (4 bytes) when None is selected, and as 48 bits (6 bytes) otherwise.
-- For each selection, the tool uses the selected ParamN entry for the corresponding T→O member and displays its name and data type.
+- The T→O assembly size is calculated as 32 bits (4 bytes) when None is selected, and as 48 bits (6 bytes) otherwise. The O→T assembly size is 16 bits (2 bytes).
+- The default configuration results in the T→O layout UINT 1 (Param1), None - INT (Param3), and INT (Param6).
+- For each selection, the tool uses the referenced ParamN entry for the corresponding T→O member and displays its name and data type.
 - The configuration data delivered to the target reflects the selected values.
 - The data sent by the reference implementation in the T→O direction is decoded according to the selected data types and structure.
 
