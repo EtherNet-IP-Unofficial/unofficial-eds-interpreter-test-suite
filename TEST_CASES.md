@@ -515,36 +515,41 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords with the elementary integer data types (SINT, USINT, INT, UINT, DINT, and UDINT) as members of an AssemN entry keyword that is delivered as the target configuration. The AssemN entry contains two members of each data type, arranged so that every 16-bit and 32-bit member starts on a 16-bit boundary without padding. Each ParamN entry has a unique name, as shown in the Member column.
+Tests the use of ParamN entry keywords with the elementary integer data types (SINT, USINT, INT, UINT, DINT, and UDINT) as members of an AssemN entry keyword that is delivered as the target configuration. The EDS defines three AssemN entries with the same aligned structure:
 
-The configuration AssemN entry has the following structure:
+- **Assem1 (O→T)** and **Assem2 (T→O)**, which intentionally reference the same ParamN entries (SINT 1, SINT 2, and so on).
+- **Assem99 (configuration)**, which references separate ParamN entries (Cfg SINT 1, Cfg SINT 2, and so on).
 
-| Member | Data type | Offset (bits) | Size (bits) |
-|---|---|---:|---:|
-| SINT 1 | SINT | 0 | 8 |
-| SINT 2 | SINT | 8 | 8 |
-| USINT 1 | USINT | 16 | 8 |
-| USINT 2 | USINT | 24 | 8 |
-| INT 1 | INT | 32 | 16 |
-| INT 2 | INT | 48 | 16 |
-| UINT 1 | UINT | 64 | 16 |
-| UINT 2 | UINT | 80 | 16 |
-| DINT 1 | DINT | 96 | 32 |
-| DINT 2 | DINT | 128 | 32 |
-| UDINT 1 | UDINT | 160 | 32 |
-| UDINT 2 | UDINT | 192 | 32 |
-| **Total** | | | **224 (28 bytes)** |
+The assemblies are used by an exclusive-owner connection (Connection1), which references Assem99 as the target configuration and uses configuration instance 99 in its path. The RPI is defined by Param1000. Each assembly contains two members of each data type, arranged so that every 16-bit and 32-bit member starts on a 16-bit boundary without padding. The reference implementation returns the configuration data it receives in the T→O direction, so that the delivered values can be checked.
 
-The reference implementation returns the configuration data it receives in the T→O direction, so that the delivered values can be checked.
+The AssemN entries have the following structure:
+
+| Offset (bits) | Size (bits) | Data type | I/O member (Assem1 and Assem2) | Configuration member (Assem99) | Configuration default and expected T→O value |
+|---:|---:|---|---|---|---:|
+| 0 | 8 | SINT | SINT 1 | Cfg SINT 1 | 1 |
+| 8 | 8 | SINT | SINT 2 | Cfg SINT 2 | −1 |
+| 16 | 8 | USINT | USINT 1 | Cfg USINT 1 | 1 |
+| 24 | 8 | USINT | USINT 2 | Cfg USINT 2 | 255 |
+| 32 | 16 | INT | INT 1 | Cfg INT 1 | 1 |
+| 48 | 16 | INT | INT 2 | Cfg INT 2 | −1 |
+| 64 | 16 | UINT | UINT 1 | Cfg UINT 1 | 1 |
+| 80 | 16 | UINT | UINT 2 | Cfg UINT 2 | 65535 |
+| 96 | 32 | DINT | DINT 1 | Cfg DINT 1 | 1 |
+| 128 | 32 | DINT | DINT 2 | Cfg DINT 2 | −1 |
+| 160 | 32 | UDINT | UDINT 1 | Cfg UDINT 1 | 1 |
+| 192 | 32 | UDINT | UDINT 2 | Cfg UDINT 2 | 4294967295 |
+| **Total** | **224 (28 bytes)** | | | | |
 
 Verifies that:
 
-- The tool correctly resolves each ParamN reference in the configuration AssemN entry and displays the corresponding parameter name for each member.
-- The size and bit offset of each member are shown correctly.
+- The tool correctly resolves each ParamN reference in the AssemN entries and displays the corresponding parameter name for each member.
+- The size and bit offset of each member are shown correctly in all three assemblies.
 - The members are displayed in the order defined in the EDS.
 - No padding is inserted.
-- The total configuration assembly size is calculated as 224 bits (28 bytes).
-- The configuration data is built from the configured parameter values and delivered to the target, and the values returned by the reference implementation in the T→O direction match the configured values.
+- The size of each assembly is calculated as 224 bits (28 bytes), since no size is declared in the AssemN entries.
+- The tool accepts the same ParamN entries being referenced by both the O→T and T→O assemblies.
+- The connection references the correct O→T, T→O, and configuration assemblies, and the RPI range (1000–100000 µs) and default (10000 µs) are shown as defined by Param1000.
+- The configuration data is built from the configured parameter values and delivered to the target, and the values returned by the reference implementation in the T→O direction match the configured values (by default, the values listed in the table).
 
 ---
 
