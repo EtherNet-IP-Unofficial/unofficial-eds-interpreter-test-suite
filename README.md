@@ -30,6 +30,7 @@ The test suite currently covers:
 - **ParamN entries:** individual tests for BOOL, SINT, INT, DINT, USINT, UINT, and UDINT, plus a combined test of all CIP elementary data types from BOOL (0xC1) to TIME (0xDB)
 - **EnumN entries:** enumerated values for integer and bit string data types
 - **AssemN entries:** assemblies built from each integer data type, plus mixed aligned and unaligned assemblies
+- **Configuration assemblies:** an aligned target configuration assembly, and Indirect Parameter References (Descriptor bit 10) where configuration parameters select the members of the T→O assembly, including a value of 0 (no reference) and referenced parameters of different sizes
 
 See [TEST_CASES.md](TEST_CASES.md) for a full description of each test case.
 
@@ -38,6 +39,8 @@ See [TEST_CASES.md](TEST_CASES.md) for a full description of each test case.
 1. Load an EDS file from the [`eds/`](eds/) folder into the EDS interpreter under test.
 2. Look up the test case in [TEST_CASES.md](TEST_CASES.md) by EDS file name.
 3. Check that the tool's behavior matches each item listed under "Verifies that."
+
+Some test cases also involve a reference implementation of the device, which exchanges I/O data with the tool. This makes it possible to check that the tool decodes T→O data correctly and delivers configuration data as expected.
 
 ## File naming convention
 

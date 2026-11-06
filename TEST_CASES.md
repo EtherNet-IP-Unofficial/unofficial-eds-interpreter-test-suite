@@ -1,6 +1,6 @@
 # EDS Test Cases
 
-This document describes the EDS (Electronic Data Sheet) test files used to verify how a tool parses and displays EDS content. Each test case has its own EDS file, located in the [`eds/`](eds/) folder, and focuses on a specific set of EDS keywords or data types.
+This document describes the EDS (Electronic Data Sheet) test files used to verify how an EDS interpreter parses and displays EDS content. These test files are unofficial and are not an ODVA publication; see the [README](README.md) for details. Each test case has its own EDS file, located in the [`eds/`](eds/) folder, and focuses on a specific set of EDS keywords or data types.
 
 ## File naming convention
 
@@ -16,24 +16,30 @@ Each EDS file name is built from the device identity in hexadecimal, in the form
 
 ## Test cases
 
-- [Minimal Requirements](#minimal-requirements)
-- [Param BOOL](#param-bool)
-- [Param USINT](#param-usint)
-- [Param UINT](#param-uint)
-- [Param UDINT](#param-udint)
-- [Param SINT](#param-sint)
-- [Param INT](#param-int)
-- [Param DINT](#param-dint)
-- [Param All Data Types](#param-all-data-types)
-- [Param Enumeration](#param-enumeration)
-- [Assem SINT](#assem-sint)
-- [Assem USINT](#assem-usint)
-- [Assem INT](#assem-int)
-- [Assem UINT](#assem-uint)
-- [Assem DINT](#assem-dint)
-- [Assem UDINT](#assem-udint)
-- [Assem Mix Aligned](#assem-mix-aligned)
-- [Assem Mix Unaligned](#assem-mix-unaligned)
+| Test | EDS file | Vendor ID | Product Type | Product Code |
+|---|---|---:|---:|---:|
+| [Minimal Requirements](#minimal-requirements) | [`0018002B00010100.eds`](eds/0018002B00010100.eds) | 24 | 43 | 1 |
+| [Param BOOL](#param-bool) | [`0018002B00020100.eds`](eds/0018002B00020100.eds) | 24 | 43 | 2 |
+| [Param USINT](#param-usint) | [`0018002B00030100.eds`](eds/0018002B00030100.eds) | 24 | 43 | 3 |
+| [Param UINT](#param-uint) | [`0018002B00040100.eds`](eds/0018002B00040100.eds) | 24 | 43 | 4 |
+| [Param UDINT](#param-udint) | [`0018002B00050100.eds`](eds/0018002B00050100.eds) | 24 | 43 | 5 |
+| [Param SINT](#param-sint) | [`0018002B00060100.eds`](eds/0018002B00060100.eds) | 24 | 43 | 6 |
+| [Param INT](#param-int) | [`0018002B00070100.eds`](eds/0018002B00070100.eds) | 24 | 43 | 7 |
+| [Param DINT](#param-dint) | [`0018002B00080100.eds`](eds/0018002B00080100.eds) | 24 | 43 | 8 |
+| [Param All Data Types](#param-all-data-types) | [`0018002B00090100.eds`](eds/0018002B00090100.eds) | 24 | 43 | 9 |
+| [Param Enumeration](#param-enumeration) | [`0018002B00140100.eds`](eds/0018002B00140100.eds) | 24 | 43 | 20 |
+| [Assem SINT](#assem-sint) | [`0018002B000A0100.eds`](eds/0018002B000A0100.eds) | 24 | 43 | 10 |
+| [Assem USINT](#assem-usint) | [`0018002B000B0100.eds`](eds/0018002B000B0100.eds) | 24 | 43 | 11 |
+| [Assem INT](#assem-int) | [`0018002B000C0100.eds`](eds/0018002B000C0100.eds) | 24 | 43 | 12 |
+| [Assem UINT](#assem-uint) | [`0018002B000D0100.eds`](eds/0018002B000D0100.eds) | 24 | 43 | 13 |
+| [Assem DINT](#assem-dint) | [`0018002B000E0100.eds`](eds/0018002B000E0100.eds) | 24 | 43 | 14 |
+| [Assem UDINT](#assem-udint) | [`0018002B000F0100.eds`](eds/0018002B000F0100.eds) | 24 | 43 | 15 |
+| [Assem Mix Aligned](#assem-mix-aligned) | [`0018002B00100100.eds`](eds/0018002B00100100.eds) | 24 | 43 | 16 |
+| [Assem Mix Unaligned](#assem-mix-unaligned) | [`0018002B00110100.eds`](eds/0018002B00110100.eds) | 24 | 43 | 17 |
+| [Assem Config Aligned](#assem-config-aligned) | [`0018002B00120100.eds`](eds/0018002B00120100.eds) | 24 | 43 | 18 |
+| [Assem Config Indirect Param Basic](#assem-config-indirect-param-basic) | [`0018002B00130100.eds`](eds/0018002B00130100.eds) | 24 | 43 | 19 |
+| [Assem Config Indirect Param Zero](#assem-config-indirect-param-zero) | [`0018002B00150100.eds`](eds/0018002B00150100.eds) | 24 | 43 | 21 |
+| [Assem Config Indirect Param Size](#assem-config-indirect-param-size) | [`0018002B00160100.eds`](eds/0018002B00160100.eds) | 24 | 43 | 22 |
 
 ---
 
@@ -485,3 +491,182 @@ Verifies that:
 - No padding is inserted.
 - The total assembly size is calculated as 112 bits (14 bytes).
 - The data sent by the reference implementation in the T→O direction is decoded correctly, with each member showing the value listed in the table.
+
+---
+
+## Assem Config Aligned
+
+| Field | Value |
+|---|---|
+| EDS file | [`0018002B00120100.eds`](eds/0018002B00120100.eds) |
+| Vendor ID | 24 |
+| Product Type | 43 |
+| Product Code | 18 |
+
+### Description
+
+Tests the use of ParamN entry keywords with the elementary integer data types (SINT, USINT, INT, UINT, DINT, and UDINT) as members of an AssemN entry keyword that is delivered as the target configuration. The AssemN entry contains two members of each data type, arranged so that every 16-bit and 32-bit member starts on a 16-bit boundary without padding. Each ParamN entry has a unique name, as shown in the Member column.
+
+The configuration AssemN entry has the following structure:
+
+| Member | Data type | Offset (bits) | Size (bits) |
+|---|---|---:|---:|
+| SINT 1 | SINT | 0 | 8 |
+| SINT 2 | SINT | 8 | 8 |
+| USINT 1 | USINT | 16 | 8 |
+| USINT 2 | USINT | 24 | 8 |
+| INT 1 | INT | 32 | 16 |
+| INT 2 | INT | 48 | 16 |
+| UINT 1 | UINT | 64 | 16 |
+| UINT 2 | UINT | 80 | 16 |
+| DINT 1 | DINT | 96 | 32 |
+| DINT 2 | DINT | 128 | 32 |
+| UDINT 1 | UDINT | 160 | 32 |
+| UDINT 2 | UDINT | 192 | 32 |
+| **Total** | | | **224 (28 bytes)** |
+
+The reference implementation returns the configuration data it receives in the T→O direction, so that the delivered values can be checked.
+
+Verifies that:
+
+- The tool correctly resolves each ParamN reference in the configuration AssemN entry and displays the corresponding parameter name for each member.
+- The size and bit offset of each member are shown correctly.
+- The members are displayed in the order defined in the EDS.
+- No padding is inserted.
+- The total configuration assembly size is calculated as 224 bits (28 bytes).
+- The configuration data is built from the configured parameter values and delivered to the target, and the values returned by the reference implementation in the T→O direction match the configured values.
+
+---
+
+## Assem Config Indirect Param Basic
+
+| Field | Value |
+|---|---|
+| EDS file | [`0018002B00130100.eds`](eds/0018002B00130100.eds) |
+| Vendor ID | 24 |
+| Product Type | 43 |
+| Product Code | 19 |
+
+### Description
+
+Tests the use of ParamN entry keywords together with the Indirect Parameter Reference (Descriptor bit 10). The values of the ParamN entries in the target configuration assembly select which ParamN entry is used for each member of the AssemN entry describing the T→O data.
+
+The target configuration assembly contains two ParamN entries:
+
+| Entry | Data type | Offset (bits) | Size (bits) | Selects |
+|---|---|---:|---:|---|
+| 1 | USINT | 0 | 8 | First T→O entry |
+| 2 | USINT | 8 | 8 | Second T→O entry |
+| **Total** | | | **16 (2 bytes)** | |
+
+The AssemN entry describing the T→O data always contains two 16-bit entries. The first entry is always a UINT, while the second entry may be either INT or UINT, depending on the selections:
+
+| Configuration entry | Selection | T→O entry | Data type | Value (T→O) |
+|---|---|---|---|---:|
+| 1 | UINT 1 | 1 | UINT | 0x1111 |
+| 1 | UINT 2 | 1 | UINT | 0x2222 |
+| 2 | INT | 2 | INT | −10000 |
+| 2 | UINT | 2 | UINT | 10000 |
+
+Verifies that:
+
+- The tool recognizes the Indirect Parameter Reference (Descriptor bit 10) and offers the enumerated choices for each configuration ParamN entry.
+- For each selection, the tool uses the selected ParamN entry for the corresponding T→O member and displays its name and data type.
+- The T→O assembly size is calculated as 32 bits (4 bytes) for all combinations.
+- The configuration data delivered to the target reflects the selected values.
+- The data sent by the reference implementation in the T→O direction is decoded according to the selected data types, with each member showing the value listed in the table, including −10000 as a negative value when INT is selected.
+
+---
+
+## Assem Config Indirect Param Zero
+
+| Field | Value |
+|---|---|
+| EDS file | [`0018002B00150100.eds`](eds/0018002B00150100.eds) |
+| Vendor ID | 24 |
+| Product Type | 43 |
+| Product Code | 21 |
+
+### Description
+
+Tests the use of ParamN entry keywords together with the Indirect Parameter Reference (Descriptor bit 10), including a parameter value of 0, which means no reference. The values of the ParamN entries in the target configuration assembly select which ParamN entry is used for each member of the AssemN entry describing the T→O data.
+
+The target configuration assembly contains three ParamN entries:
+
+| Entry | Data type | Offset (bits) | Size (bits) | Selects |
+|---|---|---:|---:|---|
+| 1 | USINT | 0 | 8 | First T→O entry |
+| 2 | USINT | 8 | 8 | Second T→O entry |
+| 3 | USINT | 16 | 8 | Third T→O entry |
+| **Total** | | | **24 (3 bytes)** | |
+
+The AssemN entry describing the T→O data contains either two or three 16-bit entries. The first entry is always a UINT, the second entry may be omitted, INT, or UINT, and the third entry may be either INT or UINT, depending on the selections:
+
+| Configuration entry | Selection | T→O entry | Data type |
+|---|---|---|---|
+| 1 | UINT 1 | 1 | UINT |
+| 1 | UINT 2 | 1 | UINT |
+| 2 | None (0) | 2 | Omitted |
+| 2 | INT | 2 | INT |
+| 2 | UINT | 2 | UINT |
+| 3 | INT | 3 | INT |
+| 3 | UINT | 3 | UINT |
+
+Verifies that:
+
+- The tool recognizes the Indirect Parameter Reference (Descriptor bit 10) and offers the enumerated choices for each configuration ParamN entry, including None.
+- A value of 0 (None) is treated as no reference: the second T→O entry is omitted, and the tool doesn't report it as an error or an invalid reference.
+- When the second entry is omitted, the third entry follows directly after the first entry, at bit offset 16 instead of 32.
+- The T→O assembly size is calculated as 32 bits (4 bytes) when None is selected, and as 48 bits (6 bytes) otherwise.
+- For each selection, the tool uses the selected ParamN entry for the corresponding T→O member and displays its name and data type.
+- The configuration data delivered to the target reflects the selected values.
+- The data sent by the reference implementation in the T→O direction is decoded according to the selected data types and structure.
+
+---
+
+## Assem Config Indirect Param Size
+
+| Field | Value |
+|---|---|
+| EDS file | [`0018002B00160100.eds`](eds/0018002B00160100.eds) |
+| Vendor ID | 24 |
+| Product Type | 43 |
+| Product Code | 22 |
+
+### Description
+
+Tests the use of ParamN entry keywords together with the Indirect Parameter Reference (Descriptor bit 10), where the referenced ParamN entries have different sizes, so that the size of the T→O data changes with the selections. The values of the ParamN entries in the target configuration assembly select which ParamN entry is used for each member of the AssemN entry describing the T→O data.
+
+The target configuration assembly contains two ParamN entries:
+
+| Entry | Data type | Offset (bits) | Size (bits) | Selects |
+|---|---|---:|---:|---|
+| 1 | USINT | 0 | 8 | First T→O entry |
+| 2 | USINT | 8 | 8 | Second T→O entry |
+| **Total** | | | **16 (2 bytes)** | |
+
+The AssemN entry describing the T→O data always contains two entries, each of which may be either UINT or UDINT, depending on the selections:
+
+| Configuration entry | Selection | T→O entry | Data type | Size (bits) |
+|---|---|---|---|---:|
+| 1 | UINT 1 | 1 | UINT | 16 |
+| 1 | UDINT 1 | 1 | UDINT | 32 |
+| 2 | UINT 2 | 2 | UINT | 16 |
+| 2 | UDINT 2 | 2 | UDINT | 32 |
+
+This results in the following T→O layouts:
+
+| First entry | Second entry | Second entry offset (bits) | Total size (bits) |
+|---|---|---:|---:|
+| UINT 1 | UINT 2 | 16 | 32 (4 bytes) |
+| UINT 1 | UDINT 2 | 16 | 48 (6 bytes) |
+| UDINT 1 | UINT 2 | 32 | 48 (6 bytes) |
+| UDINT 1 | UDINT 2 | 32 | 64 (8 bytes) |
+
+Verifies that:
+
+- The tool recognizes the Indirect Parameter Reference (Descriptor bit 10) and offers the enumerated choices for each configuration ParamN entry.
+- For each selection, the tool uses the selected ParamN entry for the corresponding T→O member and displays its name and data type.
+- The bit offset of the second entry and the total T→O assembly size are recalculated when a selection changes, as listed in the layout table.
+- The configuration data delivered to the target reflects the selected values.
+- The data sent by the reference implementation in the T→O direction is decoded according to the selected data types.
