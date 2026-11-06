@@ -669,24 +669,30 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords together with the Indirect Parameter Reference (Descriptor bit 10), where the referenced ParamN entries have different sizes, so that the size of the T→O data changes with the selections. The values of the ParamN entries in the target configuration assembly select which ParamN entry is used for each member of the AssemN entry describing the T→O data.
+Tests the use of ParamN entry keywords together with the Indirect Parameter Reference (Descriptor bit 10), where the referenced ParamN entries have different sizes, so that the size of the T→O data changes with the selections. The values of the ParamN entries in the target configuration assembly select which ParamN entry is used for each member of the AssemN entry describing the T→O data. Each enumerated value is the number of the referenced ParamN entry.
 
-The target configuration assembly contains two ParamN entries:
+The EDS defines three AssemN entries, used by an exclusive-owner connection (Connection1) with the RPI defined by Param1000:
 
-| Entry | Data type | Offset (bits) | Size (bits) | Selects |
-|---|---|---:|---:|---|
-| 1 | USINT | 0 | 8 | First T→O entry |
-| 2 | USINT | 8 | 8 | Second T→O entry |
-| **Total** | | | **16 (2 bytes)** | |
+- **Assem1 (O→T):** one 16-bit member, UINT Dummy (Param5).
+- **Assem2 (T→O):** two members, resolved indirectly through Param1001 and Param1002. Neither member has a declared size, since each is either 16 or 32 bits depending on the selection.
+- **Assem99 (configuration):** Param1001 and Param1002, delivered as the target configuration.
+
+The target configuration assembly has the following structure:
+
+| Entry | ParamN | Name | Data type | Offset (bits) | Size (bits) | Default | Selects |
+|---|---|---|---|---:|---:|---|---|
+| 1 | Param1001 | UINT 1 or UDINT 1 | USINT | 0 | 8 | 1 (UINT 1) | First T→O entry |
+| 2 | Param1002 | UINT 2 or UDINT 2 | USINT | 8 | 8 | 3 (UINT 2) | Second T→O entry |
+| **Total** | | | | | **16 (2 bytes)** | | |
 
 The AssemN entry describing the T→O data always contains two entries, each of which may be either UINT or UDINT, depending on the selections:
 
-| Configuration entry | Selection | T→O entry | Data type | Size (bits) |
-|---|---|---|---|---:|
-| 1 | UINT 1 | 1 | UINT | 16 |
-| 1 | UDINT 1 | 1 | UDINT | 32 |
-| 2 | UINT 2 | 2 | UINT | 16 |
-| 2 | UDINT 2 | 2 | UDINT | 32 |
+| Configuration entry | Selection (value) | Referenced ParamN | T→O entry | Data type | Size (bits) |
+|---|---|---|---|---|---:|
+| 1 | UINT 1 (1) | Param1 (UINT 1) | 1 | UINT | 16 |
+| 1 | UDINT 1 (2) | Param2 (UDINT 1) | 1 | UDINT | 32 |
+| 2 | UINT 2 (3) | Param3 (UINT 2) | 2 | UINT | 16 |
+| 2 | UDINT 2 (4) | Param4 (UDINT 2) | 2 | UDINT | 32 |
 
 This results in the following T→O layouts:
 
@@ -697,10 +703,14 @@ This results in the following T→O layouts:
 | UDINT 1 | UINT 2 | 32 | 48 (6 bytes) |
 | UDINT 1 | UDINT 2 | 32 | 64 (8 bytes) |
 
+With the default configuration, the T→O data consists of UINT 1 followed by UINT 2, for a total of 32 bits (4 bytes).
+
 Verifies that:
 
 - The tool recognizes the Indirect Parameter Reference (Descriptor bit 10) and offers the enumerated choices for each configuration ParamN entry.
-- For each selection, the tool uses the selected ParamN entry for the corresponding T→O member and displays its name and data type.
-- The bit offset of the second entry and the total T→O assembly size are recalculated when a selection changes, as listed in the layout table.
+- For each selection, the tool uses the referenced ParamN entry for the corresponding T→O member and displays its name and data type.
+- The tool handles T→O members with no declared size, and uses the size of the referenced ParamN entry.
+- The bit offset of the second entry and the total T→O assembly size are recalculated when a selection changes, as listed in the layout table. The O→T assembly size is 16 bits (2 bytes).
+- The default configuration results in the T→O layout UINT 1 followed by UINT 2.
 - The configuration data delivered to the target reflects the selected values.
 - The data sent by the reference implementation in the T→O direction is decoded according to the selected data types.
