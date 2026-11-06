@@ -298,14 +298,15 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords with data type SINT (0xC2) as members of AssemN entry keywords. Each AssemN entry references two ParamN entries, each with a unique name (for example, SINT 1, SINT 2).
+Tests the use of ParamN entry keywords with data type SINT (0xC2) as members of AssemN entry keywords. The EDS defines two AssemN entries, one for O→T data (Assem1) and one for T→O data (Assem2), each referencing two ParamN entries with unique names (SINT 1 and SINT 2 for O→T, SINT 3 and SINT 4 for T→O). The assemblies are used by an exclusive-owner connection (Connection1), with the RPI defined by Param1000.
 
 Verifies that:
 
-- The tool correctly resolves each ParamN reference in the AssemN entry and displays the corresponding parameter name for each assembly member.
+- The tool correctly resolves each ParamN reference in the AssemN entries and displays the corresponding parameter name for each assembly member.
 - The member size is shown as 8 bits per SINT member.
 - The members are displayed in the order defined in the EDS.
-- The total assembly size is calculated correctly.
+- The size of each assembly is calculated as 16 bits (2 bytes), since no size is declared in the AssemN entries.
+- The connection references the correct O→T and T→O assemblies, and the RPI range (1000–100000 µs) and default (10000 µs) are shown as defined by Param1000.
 
 ---
 
@@ -320,14 +321,15 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords with data type USINT (0xC6) as members of AssemN entry keywords. Each AssemN entry references two ParamN entries, each with a unique name (for example, USINT 1, USINT 2).
+Tests the use of ParamN entry keywords with data type USINT (0xC6) as members of AssemN entry keywords. The EDS defines two AssemN entries, one for O→T data (Assem1) and one for T→O data (Assem2), each referencing two ParamN entries with unique names (USINT 1 and USINT 2 for O→T, USINT 3 and USINT 4 for T→O). The assemblies are used by an exclusive-owner connection (Connection1), with the RPI defined by Param1000.
 
 Verifies that:
 
-- The tool correctly resolves each ParamN reference in the AssemN entry and displays the corresponding parameter name for each assembly member.
+- The tool correctly resolves each ParamN reference in the AssemN entries and displays the corresponding parameter name for each assembly member.
 - The member size is shown as 8 bits per USINT member.
 - The members are displayed in the order defined in the EDS.
-- The total assembly size is calculated correctly.
+- The size of each assembly is calculated as 16 bits (2 bytes), since no size is declared in the AssemN entries.
+- The connection references the correct O→T and T→O assemblies, and the RPI range (1000–100000 µs) and default (10000 µs) are shown as defined by Param1000.
 
 ---
 
@@ -342,14 +344,15 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords with data type INT (0xC3) as members of AssemN entry keywords. Each AssemN entry references two ParamN entries, each with a unique name (for example, INT 1, INT 2).
+Tests the use of ParamN entry keywords with data type INT (0xC3) as members of AssemN entry keywords. The EDS defines two AssemN entries, one for O→T data (Assem1) and one for T→O data (Assem2), each referencing two ParamN entries with unique names (INT 1 and INT 2 for O→T, INT 3 and INT 4 for T→O). The assemblies are used by an exclusive-owner connection (Connection1), with the RPI defined by Param1000.
 
 Verifies that:
 
-- The tool correctly resolves each ParamN reference in the AssemN entry and displays the corresponding parameter name for each assembly member.
+- The tool correctly resolves each ParamN reference in the AssemN entries and displays the corresponding parameter name for each assembly member.
 - The member size is shown as 16 bits per INT member.
 - The members are displayed in the order defined in the EDS.
-- The total assembly size is calculated correctly.
+- The size of each assembly is calculated as 32 bits (4 bytes), since no size is declared in the AssemN entries.
+- The connection references the correct O→T and T→O assemblies, and the RPI range (1000–100000 µs) and default (10000 µs) are shown as defined by Param1000.
 
 ---
 
@@ -364,14 +367,15 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords with data type UINT (0xC7) as members of AssemN entry keywords. Each AssemN entry references two ParamN entries, each with a unique name (for example, UINT 1, UINT 2).
+Tests the use of ParamN entry keywords with data type UINT (0xC7) as members of AssemN entry keywords. The EDS defines two AssemN entries, one for O→T data (Assem1) and one for T→O data (Assem2), each referencing two ParamN entries with unique names (UINT 1 and UINT 2 for O→T, UINT 3 and UINT 4 for T→O). The assemblies are used by an exclusive-owner connection (Connection1), with the RPI defined by Param1000.
 
 Verifies that:
 
-- The tool correctly resolves each ParamN reference in the AssemN entry and displays the corresponding parameter name for each assembly member.
+- The tool correctly resolves each ParamN reference in the AssemN entries and displays the corresponding parameter name for each assembly member.
 - The member size is shown as 16 bits per UINT member.
 - The members are displayed in the order defined in the EDS.
-- The total assembly size is calculated correctly.
+- The size of each assembly is calculated as 32 bits (4 bytes), since no size is declared in the AssemN entries.
+- The connection references the correct O→T and T→O assemblies, and the RPI range (1000–100000 µs) and default (10000 µs) are shown as defined by Param1000.
 
 ---
 
@@ -386,14 +390,15 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords with data type DINT (0xC4) as members of AssemN entry keywords. Each AssemN entry references two ParamN entries, each with a unique name (for example, DINT 1, DINT 2).
+Tests the use of ParamN entry keywords with data type DINT (0xC4) as members of AssemN entry keywords. The EDS defines two AssemN entries, one for O→T data (Assem1) and one for T→O data (Assem2), each referencing two ParamN entries with unique names (DINT 1 and DINT 2 for O→T, DINT 3 and DINT 4 for T→O). The assemblies are used by an exclusive-owner connection (Connection1), with the RPI defined by Param1000.
 
 Verifies that:
 
-- The tool correctly resolves each ParamN reference in the AssemN entry and displays the corresponding parameter name for each assembly member.
+- The tool correctly resolves each ParamN reference in the AssemN entries and displays the corresponding parameter name for each assembly member.
 - The member size is shown as 32 bits per DINT member.
 - The members are displayed in the order defined in the EDS.
-- The total assembly size is calculated correctly.
+- The size of each assembly is calculated as 64 bits (8 bytes), since no size is declared in the AssemN entries.
+- The connection references the correct O→T and T→O assemblies, and the RPI range (1000–100000 µs) and default (10000 µs) are shown as defined by Param1000.
 
 ---
 
@@ -408,14 +413,15 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords with data type UDINT (0xC8) as members of AssemN entry keywords. Each AssemN entry references two ParamN entries, each with a unique name (for example, UDINT 1, UDINT 2).
+Tests the use of ParamN entry keywords with data type UDINT (0xC8) as members of AssemN entry keywords. The EDS defines two AssemN entries, one for O→T data (Assem1) and one for T→O data (Assem2), each referencing two ParamN entries with unique names (UDINT 1 and UDINT 2 for O→T, UDINT 3 and UDINT 4 for T→O). The assemblies are used by an exclusive-owner connection (Connection1), with the RPI defined by Param1000.
 
 Verifies that:
 
-- The tool correctly resolves each ParamN reference in the AssemN entry and displays the corresponding parameter name for each assembly member.
+- The tool correctly resolves each ParamN reference in the AssemN entries and displays the corresponding parameter name for each assembly member.
 - The member size is shown as 32 bits per UDINT member.
 - The members are displayed in the order defined in the EDS.
-- The total assembly size is calculated correctly.
+- The size of each assembly is calculated as 64 bits (8 bytes), since no size is declared in the AssemN entries.
+- The connection references the correct O→T and T→O assemblies, and the RPI range (1000–100000 µs) and default (10000 µs) are shown as defined by Param1000.
 
 ---
 
