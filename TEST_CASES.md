@@ -256,6 +256,7 @@ Verifies that:
 - String defaults, including Unicode characters and escape sequences, are displayed correctly.
 - Bit string defaults specified in binary notation are parsed correctly.
 - STIME defaults specified in decimal, formatted (`yyyy-mm-dd-hh:nn:ss.iii.jjj.kkk`), and hexadecimal notation are parsed correctly, and all three display the same date and time (2025-11-12 02:14:00 UTC).
+- The DATE, TIME_OF_DAY, and DATE_AND_TIME defaults are displayed as the dates and times stated in their help strings: 2025-12-14, 08:46:00, and 2025-12-14 08:51:00. The display format may differ between tools, but the date and time shown must be the same.
 - The data type and data size are shown correctly for each parameter.
 - The parameter name, units, and help string are displayed as defined in the EDS.
 
