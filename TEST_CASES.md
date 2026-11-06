@@ -37,9 +37,9 @@ Each EDS file name is built from the device identity in hexadecimal, in the form
 | [Assem Mix Aligned](#assem-mix-aligned) | [`0018002B00100100.eds`](eds/0018002B00100100.eds) | 24 | 43 | 16 |
 | [Assem Mix Unaligned](#assem-mix-unaligned) | [`0018002B00110100.eds`](eds/0018002B00110100.eds) | 24 | 43 | 17 |
 | [Assem Config Aligned](#assem-config-aligned) | [`0018002B00120100.eds`](eds/0018002B00120100.eds) | 24 | 43 | 18 |
-| [Assem Config Indirect Param Basic](#assem-config-indirect-param-basic) | [`0018002B00130100.eds`](eds/0018002B00130100.eds) | 24 | 43 | 19 |
-| [Assem Config Indirect Param Zero](#assem-config-indirect-param-zero) | [`0018002B00150100.eds`](eds/0018002B00150100.eds) | 24 | 43 | 21 |
-| [Assem Config Indirect Param Size](#assem-config-indirect-param-size) | [`0018002B00160100.eds`](eds/0018002B00160100.eds) | 24 | 43 | 22 |
+| [Assem Config Indirect Basic](#assem-config-indirect-basic) | [`0018002B00130100.eds`](eds/0018002B00130100.eds) | 24 | 43 | 19 |
+| [Assem Config Indirect Zero](#assem-config-indirect-zero) | [`0018002B00150100.eds`](eds/0018002B00150100.eds) | 24 | 43 | 21 |
+| [Assem Config Indirect Size](#assem-config-indirect-size) | [`0018002B00160100.eds`](eds/0018002B00160100.eds) | 24 | 43 | 22 |
 
 ---
 
@@ -61,6 +61,7 @@ Verifies that:
 - The tool parses the file without errors or warnings.
 - The required `[File]` section keywords (DescText, CreateDate, CreateTime, ModDate, ModTime, and Revision) are read and displayed correctly.
 - The required `[Device]` section keywords (VendCode, VendName, ProdType, ProdTypeStr, ProdCode, MajRev, MinRev, and ProdName) are read and displayed correctly.
+- The `[Device Classification]` section is read correctly, with the device classified as EtherNetIP.
 - The tool doesn't depend on any optional sections or keywords, and doesn't report their absence as an error.
 
 ---
@@ -538,7 +539,7 @@ Verifies that:
 
 ---
 
-## Assem Config Indirect Param Basic
+## Assem Config Indirect Basic
 
 | Field | Value |
 |---|---|
@@ -578,7 +579,7 @@ Verifies that:
 
 ---
 
-## Assem Config Indirect Param Zero
+## Assem Config Indirect Zero
 
 | Field | Value |
 |---|---|
@@ -624,7 +625,7 @@ Verifies that:
 
 ---
 
-## Assem Config Indirect Param Size
+## Assem Config Indirect Size
 
 | Field | Value |
 |---|---|
