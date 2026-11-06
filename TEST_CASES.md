@@ -564,30 +564,39 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords together with the Indirect Parameter Reference (Descriptor bit 10). The values of the ParamN entries in the target configuration assembly select which ParamN entry is used for each member of the AssemN entry describing the T→O data.
+Tests the use of ParamN entry keywords together with the Indirect Parameter Reference (Descriptor bit 10). The values of the ParamN entries in the target configuration assembly select which ParamN entry is used for each member of the AssemN entry describing the T→O data. Each enumerated value is the number of the referenced ParamN entry.
 
-The target configuration assembly contains two ParamN entries:
+The EDS defines three AssemN entries, used by an exclusive-owner connection (Connection1) with the RPI defined by Param1000:
 
-| Entry | Data type | Offset (bits) | Size (bits) | Selects |
-|---|---|---:|---:|---|
-| 1 | USINT | 0 | 8 | First T→O entry |
-| 2 | USINT | 8 | 8 | Second T→O entry |
-| **Total** | | | **16 (2 bytes)** | |
+- **Assem1 (O→T):** one 16-bit member, UINT Dummy (Param5).
+- **Assem2 (T→O):** two 16-bit members, resolved indirectly through Param1001 and Param1002.
+- **Assem99 (configuration):** Param1001 and Param1002, delivered as the target configuration.
+
+The target configuration assembly has the following structure:
+
+| Entry | ParamN | Name | Data type | Offset (bits) | Size (bits) | Default | Selects |
+|---|---|---|---|---:|---:|---|---|
+| 1 | Param1001 | UINT 1 or UINT 2 | USINT | 0 | 8 | 1 (UINT 1) | First T→O entry |
+| 2 | Param1002 | INT or UINT | USINT | 8 | 8 | 3 (INT) | Second T→O entry |
+| **Total** | | | | | **16 (2 bytes)** | | |
 
 The AssemN entry describing the T→O data always contains two 16-bit entries. The first entry is always a UINT, while the second entry may be either INT or UINT, depending on the selections:
 
-| Configuration entry | Selection | T→O entry | Data type | Value (T→O) |
-|---|---|---|---|---:|
-| 1 | UINT 1 | 1 | UINT | 0x1111 |
-| 1 | UINT 2 | 1 | UINT | 0x2222 |
-| 2 | INT | 2 | INT | −10000 |
-| 2 | UINT | 2 | UINT | 10000 |
+| Configuration entry | Selection (value) | Referenced ParamN | T→O entry | Data type | Value (T→O) |
+|---|---|---|---|---|---:|
+| 1 | UINT 1 (1) | Param1 | 1 | UINT | 0x1111 |
+| 1 | UINT 2 (2) | Param2 | 1 | UINT | 0x2222 |
+| 2 | INT (3) | Param3 | 2 | INT | −10000 |
+| 2 | UINT (4) | Param4 | 2 | UINT | 10000 |
+
+With the default configuration, the T→O data consists of UINT 1 (0x1111) followed by INT (−10000).
 
 Verifies that:
 
 - The tool recognizes the Indirect Parameter Reference (Descriptor bit 10) and offers the enumerated choices for each configuration ParamN entry.
-- For each selection, the tool uses the selected ParamN entry for the corresponding T→O member and displays its name and data type.
-- The T→O assembly size is calculated as 32 bits (4 bytes) for all combinations.
+- For each selection, the tool uses the referenced ParamN entry for the corresponding T→O member and displays its name and data type.
+- The default configuration results in the T→O layout UINT 1 followed by INT.
+- The T→O assembly size is calculated as 32 bits (4 bytes) for all combinations, and the O→T assembly size as 16 bits (2 bytes).
 - The configuration data delivered to the target reflects the selected values.
 - The data sent by the reference implementation in the T→O direction is decoded according to the selected data types, with each member showing the value listed in the table, including −10000 as a negative value when INT is selected.
 
