@@ -315,7 +315,7 @@ $ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
                 0x0000,                 $ Descriptor
                 0xCC,                   $ Data Type
                 8,                      $ Data Size in bytes
-                "STIME",                $ name
+                "STIME 1",              $ name
                 "",                     $ units
                 "Expected 2025-11-12 02:14:00 UTC",                     $ help string
                 ,,1762913640000000000,  $ min, max, default data values
@@ -556,4 +556,29 @@ $ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
                 ,,,,                    $ mult, div, base, offset scaling
                 ,,,,                    $ mult, div, base, offset links
                 ;                       $ decimal places
-
+        Param42 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xCC,                   $ Data Type
+                8,                      $ Data Size in bytes
+                "STIME 2",              $ name
+                "",                     $ units
+                "Expected 2025-11-12 02:14:00 UTC (formatted notation)",    $ help string
+                ,,2025-11-12-02:14:00.000.000.000,    $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Param43 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xCC,                   $ Data Type
+                8,                      $ Data Size in bytes
+                "STIME 3",              $ name
+                "",                     $ units
+                "Expected 2025-11-12 02:14:00 UTC (hexadecimal notation)",    $ help string
+                ,,0x1877209D81E41000,   $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places

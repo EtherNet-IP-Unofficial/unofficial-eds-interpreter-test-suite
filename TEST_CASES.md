@@ -255,6 +255,7 @@ Verifies that:
 - The maximum values of the unsigned integer types (including 64-bit ULINT) are displayed correctly.
 - String defaults, including Unicode characters and escape sequences, are displayed correctly.
 - Bit string defaults specified in binary notation are parsed correctly.
+- STIME defaults specified in decimal, formatted (`yyyy-mm-dd-hh:nn:ss.iii.jjj.kkk`), and hexadecimal notation are parsed correctly, and all three display the same date and time (2025-11-12 02:14:00 UTC).
 - The data type and data size are shown correctly for each parameter.
 - The parameter name, units, and help string are displayed as defined in the EDS.
 
