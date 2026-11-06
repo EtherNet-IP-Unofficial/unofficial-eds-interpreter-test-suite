@@ -436,33 +436,34 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords with the elementary integer data types (SINT, USINT, INT, UINT, DINT, and UDINT) as members of AssemN entry keywords. Each AssemN entry contains two members of each data type, arranged so that every 16-bit and 32-bit member starts on a 16-bit boundary without padding. Each ParamN entry has a unique name, as shown in the Member column.
+Tests the use of ParamN entry keywords with the elementary integer data types (SINT, USINT, INT, UINT, DINT, and UDINT) as members of AssemN entry keywords. The EDS defines two AssemN entries, one for O→T data (Assem1) and one for T→O data (Assem2). Each contains two members of each data type, arranged so that every 16-bit and 32-bit member starts on a 16-bit boundary without padding. The assemblies are used by an exclusive-owner connection (Connection1), with the RPI defined by Param1000.
 
-The AssemN entries have the following structure:
+Both AssemN entries have the following structure. Each ParamN entry has a unique name, as shown in the O→T and T→O member columns:
 
-| Member | Data type | Offset (bits) | Size (bits) |
-|---|---|---:|---:|
-| SINT 1 | SINT | 0 | 8 |
-| SINT 2 | SINT | 8 | 8 |
-| USINT 1 | USINT | 16 | 8 |
-| USINT 2 | USINT | 24 | 8 |
-| INT 1 | INT | 32 | 16 |
-| INT 2 | INT | 48 | 16 |
-| UINT 1 | UINT | 64 | 16 |
-| UINT 2 | UINT | 80 | 16 |
-| DINT 1 | DINT | 96 | 32 |
-| DINT 2 | DINT | 128 | 32 |
-| UDINT 1 | UDINT | 160 | 32 |
-| UDINT 2 | UDINT | 192 | 32 |
-| **Total** | | | **224 (28 bytes)** |
+| Offset (bits) | Size (bits) | Data type | O→T member (Assem1) | T→O member (Assem2) |
+|---:|---:|---|---|---|
+| 0 | 8 | SINT | SINT 1 | SINT 3 |
+| 8 | 8 | SINT | SINT 2 | SINT 4 |
+| 16 | 8 | USINT | USINT 1 | USINT 3 |
+| 24 | 8 | USINT | USINT 2 | USINT 4 |
+| 32 | 16 | INT | INT 1 | INT 3 |
+| 48 | 16 | INT | INT 2 | INT 4 |
+| 64 | 16 | UINT | UINT 1 | UINT 3 |
+| 80 | 16 | UINT | UINT 2 | UINT 4 |
+| 96 | 32 | DINT | DINT 1 | DINT 3 |
+| 128 | 32 | DINT | DINT 2 | DINT 4 |
+| 160 | 32 | UDINT | UDINT 1 | UDINT 3 |
+| 192 | 32 | UDINT | UDINT 2 | UDINT 4 |
+| **Total** | **224 (28 bytes)** | | | |
 
 Verifies that:
 
-- The tool correctly resolves each ParamN reference in the AssemN entry and displays the corresponding parameter name for each member.
+- The tool correctly resolves each ParamN reference in the AssemN entries and displays the corresponding parameter name for each member.
 - The size and bit offset of each member are shown correctly.
 - The members are displayed in the order defined in the EDS.
 - No padding is inserted.
-- The total assembly size is calculated as 224 bits (28 bytes).
+- The size of each assembly is calculated as 224 bits (28 bytes), since no size is declared in the AssemN entries.
+- The connection references the correct O→T and T→O assemblies, and the RPI range (1000–100000 µs) and default (10000 µs) are shown as defined by Param1000.
 
 ---
 
@@ -477,27 +478,28 @@ Verifies that:
 
 ### Description
 
-Tests the use of ParamN entry keywords with the unsigned elementary integer data types (USINT, UINT, and UDINT) as members of AssemN entry keywords. Each AssemN entry contains two members of each data type, packed without alignment or padding, so that some 16-bit and 32-bit members do not start on their natural alignment boundary. Each ParamN entry has a unique name, as shown in the Member column.
+Tests the use of ParamN entry keywords with the unsigned elementary integer data types (USINT, UINT, and UDINT) as members of AssemN entry keywords. The EDS defines two AssemN entries, one for O→T data (Assem1) and one for T→O data (Assem2). Each contains two members of each data type, packed without alignment or padding, so that some 16-bit and 32-bit members do not start on their natural alignment boundary. The assemblies are used by an exclusive-owner connection (Connection1), with the RPI defined by Param1000.
 
-The AssemN entries have the following structure:
+Both AssemN entries have the following structure. Each ParamN entry has a unique name, as shown in the O→T and T→O member columns:
 
-| Member | Data type | Offset (bits) | Size (bits) | Value (T→O) |
-|---|---|---:|---:|---:|
-| USINT 1 | USINT | 0 | 8 | 8 |
-| UINT 1 | UINT | 8 | 16 | 16 |
-| UDINT 1 | UDINT | 24 | 32 | 32 |
-| USINT 2 | USINT | 56 | 8 | 8 |
-| UINT 2 | UINT | 64 | 16 | 16 |
-| UDINT 2 | UDINT | 80 | 32 | 32 |
-| **Total** | | | **112 (14 bytes)** | |
+| Offset (bits) | Size (bits) | Data type | O→T member (Assem1) | T→O member (Assem2) | Value (T→O) |
+|---:|---:|---|---|---|---:|
+| 0 | 8 | USINT | USINT 1 | USINT 3 | 8 |
+| 8 | 16 | UINT | UINT 1 | UINT 3 | 16 |
+| 24 | 32 | UDINT | UDINT 1 | UDINT 3 | 32 |
+| 56 | 8 | USINT | USINT 2 | USINT 4 | 8 |
+| 64 | 16 | UINT | UINT 2 | UINT 4 | 16 |
+| 80 | 32 | UDINT | UDINT 2 | UDINT 4 | 32 |
+| **Total** | **112 (14 bytes)** | | | | |
 
 Verifies that:
 
-- The tool correctly resolves each ParamN reference in the AssemN entry and displays the corresponding parameter name for each member.
+- The tool correctly resolves each ParamN reference in the AssemN entries and displays the corresponding parameter name for each member.
 - The size and bit offset of each member are shown correctly.
 - The members are displayed in the order defined in the EDS.
 - No padding is inserted.
-- The total assembly size is calculated as 112 bits (14 bytes).
+- The size of each assembly is calculated as 112 bits (14 bytes), since no size is declared in the AssemN entries.
+- The connection references the correct O→T and T→O assemblies, and the RPI range (1000–100000 µs) and default (10000 µs) are shown as defined by Param1000.
 - The data sent by the reference implementation in the T→O direction is decoded correctly, with each member showing the value listed in the table.
 
 ---
