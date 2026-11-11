@@ -117,7 +117,7 @@ $ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
         Param8 =
                 0,                      $ reserved, shall equal 0
                 4,"20 0F 24 08",        $ Link Path Size, Link Path
-                0x0000,                 $ Descriptor
+                0x0004,                 $ Descriptor
                 0xC6,                   $ Data Type
                 1,                      $ Data Size in bytes
                 "USINT 8",              $ name
