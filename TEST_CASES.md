@@ -40,6 +40,7 @@ Each EDS file name is built from the device identity in hexadecimal, in the form
 | [Assem Config Indirect Basic](#assem-config-indirect-basic) | [`0018002B00130100.eds`](eds/0018002B00130100.eds) | 24 | 43 | 19 |
 | [Assem Config Indirect Zero](#assem-config-indirect-zero) | [`0018002B00150100.eds`](eds/0018002B00150100.eds) | 24 | 43 | 21 |
 | [Assem Config Indirect Size](#assem-config-indirect-size) | [`0018002B00160100.eds`](eds/0018002B00160100.eds) | 24 | 43 | 22 |
+| [Assem Config Unaligned Padding](#assem-config-unaligned-padding) | [`0018002B00170100.eds`](eds/0018002B00170100.eds) | 24 | 43 | 23 |
 
 ---
 
@@ -717,3 +718,55 @@ Verifies that:
 - The default configuration results in the T→O layout UINT 1 followed by UINT 2.
 - The configuration data delivered to the target reflects the selected values.
 - The data sent by the reference implementation in the T→O direction is decoded according to the selected data types.
+
+## Assem Config Unaligned Padding
+
+| Field | Value |
+|---|---|
+| EDS file | [`0018002B00170100.eds`](eds/0018002B00170100.eds) |
+| Vendor ID | 24 |
+| Product Type | 43 |
+| Product Code | 23 |
+
+### Description
+
+Tests the use of ParamN entry keywords with the elementary integer data types (BOOL, SINT, SINT as Enum, USINT, INT, UINT, DINT, UDINT) as members of an AssemN entry keyword that is delivered as the target configuration. The EDS defines two AssemN entries with the same unaligned structure including padding:
+
+- **Assem1 (O→T)** and **Assem2 (T→O)**, which intentionally reference the same ParamN entries (SINT 1, SINT 2, and so on).
+- **Assem99 (configuration)**, which references separate ParamN entries (Cfg SINT 1, Cfg SINT 2, and so on).
+
+The assemblies are used by an exclusive-owner connection (Connection1), which references Assem99 as the target configuration and uses configuration instance 99 in its path. The RPI is defined by Param1000. Each assembly contains two members of each data type, arranged so that every 16-bit and 32-bit member starts on a 16-bit boundary without padding. The reference implementation returns the configuration data it receives in the T→O direction, so that the delivered values can be checked.
+
+The AssemN entries have the following structure:
+
+| Offset (bits) | Size (bits) | Data type | I/O member (Assem1 and Assem2) | Configuration member (Assem99) | Configuration default and expected T→O value |
+|---:|---:|---|---|---|---:|
+| 0 | 8 | SINT | SINT 1 | Cfg SINT 1 | 1 |
+| 8 | 8 | SINT | SINT 2 | Cfg SINT 2 | −1 |
+| 16 | 8 | USINT | USINT 1 | Cfg USINT 1 | 1 |
+| 24 | 8 | USINT | USINT 2 | Cfg USINT 2 | 255 |
+| 32 | 16 | INT | INT 1 | Cfg INT 1 | 1 |
+| 48 | 16 | INT | INT 2 | Cfg INT 2 | −1 |
+| 64 | 16 | UINT | UINT 1 | Cfg UINT 1 | 1 |
+| 80 | 16 | UINT | UINT 2 | Cfg UINT 2 | 65535 |
+| 96 | 32 | DINT | DINT 1 | Cfg DINT 1 | 1 |
+| 128 | 32 | DINT | DINT 2 | Cfg DINT 2 | −1 |
+| 160 | 32 | UDINT | UDINT 1 | Cfg UDINT 1 | 1 |
+| 192 | 2 | SINT | SINT Enum1 | Cfg SINT Enum 1 | 1 |
+| 194 | 1 | BOOL | BOOL 1 | Cfg BOOL 1 | 1 |
+| 195 | 5 | - | - | - | - |
+| 200 | 32 | UDINT | UDINT 2 | Cfg UDINT 2 | 4294967295 |
+| **Total** | **232 (29 bytes / 15 Words)** | | | | |
+
+Verifies that:
+
+- The tool correctly resolves each ParamN reference in the AssemN entries and displays the corresponding parameter name for each member.
+- The size and bit offset of each member are shown correctly in all three assemblies.
+- The members are displayed in the order defined in the EDS.
+- The size of each assembly is calculated as 232 bits (29 bytes), since no size is declared in the AssemN entries. Also 240 bits (30 bytes is accepted) for the Assem99 (configuration).
+- The tool accepts the same ParamN entries being referenced by both the O→T and T→O assemblies.
+- The connection references the correct O→T, T→O, and configuration assemblies, and the RPI range (1000–100000 µs) and default (10000 µs) are shown as defined by Param1000.
+- The configuration data is built from the configured parameter values and delivered to the target, and the values returned by the reference implementation in the T→O direction match the configured values (by default, the values listed in the table).
+- Padding byte is inserted at the end of the configuration assembly in ForwardOpen
+- Padding bits (Offset 195) are not visible
+- Reduced size of the SINT is correctly mapped
