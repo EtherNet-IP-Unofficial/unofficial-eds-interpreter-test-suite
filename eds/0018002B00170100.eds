@@ -1,7 +1,7 @@
 $ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
 
 [File]
-        DescText = "Unofficial EDS Interpreter Test: Assem Config Unaligned Padded";
+        DescText = "Unofficial EDS Interpreter Test: Assem Config Unaligned Padding";
         CreateDate = 11-11-2026;
         CreateTime = 14:04:19;
         ModDate = 11-11-2026;
@@ -17,7 +17,7 @@ $ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
         ProdCode = 23;
         MajRev = 1;
         MinRev = 1;
-        ProdName = "Assem Config Padding";
+        ProdName = "Assem Config Unaligned Padded";
 
 [Device Classification]
         Class1 = EtherNetIP;
@@ -179,6 +179,9 @@ $ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
                 ,,,,                    $ mult, div, base, offset scaling
                 ,,,,                    $ mult, div, base, offset links
                 ;                       $ decimal places
+        Enum12 =
+                1,"Value 1",
+                3,"Value 3";
         Param13 =
                 0,                      $ reserved, shall equal 0
                 ,,                      $ Link Path Size, Link Path
@@ -450,7 +453,7 @@ $ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
                 5,,
                 32,Param14;
         Assem99 =
-                "Config Aligned",
+                "Config Unaligned Aligned",
                 ,
                 ,
                 0x0000,
@@ -516,6 +519,6 @@ $ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
                 Param1000,,Assem2,      $ T->O RPI, size, format
                 ,,                      $ proxy config size, format
                 ,Assem99,               $ target config size, format
-                "Config Aligned",       $ Connection Name
+                "Config Unaligned Aligned",    $ Connection Name
                 "",                     $ help string
                 "20 04 24 63 2C 01 2C 02";    $ Path
