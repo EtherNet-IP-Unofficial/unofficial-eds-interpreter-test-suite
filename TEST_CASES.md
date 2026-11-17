@@ -109,7 +109,7 @@ Verifies that:
 - Values specified in hexadecimal notation (0x00–0xFF) are parsed correctly and displayed as their equivalent values.
 - The data type is shown as USINT with a data size of 1 byte.
 - The parameter name, units, and help string are displayed as defined in the EDS.
-- Scaling and decimal precision is used as defined in the EDS.
+- Scaling and decimal places are applied as defined in the EDS (Param8: 0–255 displayed as 0.0–25.5, default 12.8).
 
 ---
 
@@ -719,6 +719,8 @@ Verifies that:
 - The configuration data delivered to the target reflects the selected values.
 - The data sent by the reference implementation in the T→O direction is decoded according to the selected data types.
 
+---
+
 ## Assem Config Unaligned Padding
 
 | Field | Value |
@@ -763,7 +765,7 @@ Verifies that:
 - The tool correctly resolves each ParamN reference in the AssemN entries and displays the corresponding parameter name for each member.
 - The size and bit offset of each member are shown correctly in all three assemblies.
 - The members are displayed in the order defined in the EDS.
-- The size of each assembly is calculated as 232 bits (29 bytes), since no size is declared in the AssemN entries. Also 240 bits (30 bytes is accepted) for the Assem99 (configuration).
+- The size of each assembly is calculated as 232 bits (29 bytes), since no size is declared in the AssemN entries. For the configuration assembly (Assem99) in ForwardOpen a value of 240 bits (30 bytes / 15 words) is accepted, the last byte (Bitoffset 232) should be filled with zero as padding byte as ForwardOpen data segment size is calculated in words.
 - The tool accepts the same ParamN entries being referenced by both the O→T and T→O assemblies.
 - The connection references the correct O→T, T→O, and configuration assemblies, and the RPI range (1000–100000 µs) and default (10000 µs) are shown as defined by Param1000.
 - The configuration data is built from the configured parameter values and delivered to the target, and the values returned by the reference implementation in the T→O direction match the configured values (by default, the values listed in the table).
