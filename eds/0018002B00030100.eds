@@ -114,4 +114,16 @@ $ EZ-EDS Version 3.38.20251024 Generated Electronic Data Sheet
                 ,,,,                    $ mult, div, base, offset scaling
                 ,,,,                    $ mult, div, base, offset links
                 ;                       $ decimal places
-
+        Param8 =
+                0,                      $ reserved, shall equal 0
+                4,"20 0F 24 08",        $ Link Path Size, Link Path
+                0x0004,                 $ Descriptor
+                0xC6,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "USINT 8",              $ name
+                "Unit 8",               $ units
+                "Range 0.0 to 25.5, default 12.8",    $ help string
+                0,255,128,              $ min, max, default data values
+                1,10,1,0,               $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                1;                      $ decimal places
